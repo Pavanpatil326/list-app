@@ -1,0 +1,394 @@
+:root {
+    box-sizing: border-box;
+    --font-color: #fefbd8;
+    --font-hover: #d6d2a4;
+    --body-background: #d5f4e6;
+    --header-background: #80ced6;
+    --box-background: #618685;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--font-hover);
+}
+
+body {
+    display: grid;
+    grid-template-rows: minmax(100px,15vh) minmax(600px,85vh) 30px;
+    margin: 0;
+    background-color: var(--body-background);
+}
+
+/* ---------------------------------------- */
+/*                  HEADER                  */
+
+header {
+    display: grid;
+    grid-row-start: 1;
+    background-color: var(--header-background);
+    grid-template-columns: 2fr repeat(3,1fr);
+}
+
+.logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo img {
+    background-color: var(--font-color);
+    border-radius: 3rem;
+    margin: 0.5rem;
+    padding: 0.5rem;
+    width: calc(5vh + 20px);
+}
+
+.logo img:hover {
+    background-color: var(--font-hover);
+}
+
+.logo h1 {
+    font-size: calc(3vh + 12px);
+    margin-top: -0.5rem;
+    color: var(--font-color);
+    text-shadow: 0 0 8px var(--box-background);
+}
+
+.logo h1:hover {
+    color: var(--font-hover);
+}
+
+.add,.remove,.search {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--font-color);
+    font-size: calc(2vh + 10px);
+    text-align: center;
+    width: 14vw;
+    height: 10vh;
+    padding: 0.5rem;
+    border: 2px solid var(--font-color);
+    border-radius: 1rem;
+    background-color: var(--box-background);
+    align-self: center;
+    justify-self: center;
+}
+
+.add:hover,.remove:hover,.search:hover {
+    border-color: var(--font-hover);
+    color: var(--font-hover)
+}
+
+/* ---------------------------------------- */
+/*                  CATALOG                 */
+
+#catalog {
+    display: grid;
+    grid-template: repeat(auto-fit,minmax(120px,35vh)) / repeat(auto-fit,minmax(60px,15vw));
+    gap: 1rem;
+    padding: 1.5rem;
+    margin: 2rem;
+    overflow: scroll;
+}
+
+#catalog div {
+    text-align: center;
+    max-width: 15vw;
+    display: grid;
+    grid-template: repeat(5, 1fr) / 1fr 5fr 1fr;
+    color: var(--font-color);
+    background-color: var(--box-background);
+    border: 5px solid var(--box-background);
+    border-radius: 0.5rem;
+}
+
+#catalog div h2 {
+    grid-area: 1 / 2 / 2 / 3;
+    margin: 0.5rem;
+    font-size: clamp(16px,3.5vh,32px);
+    -webkit-text-stroke: 0.1vh black;
+    text-overflow: ellipsis;
+    overflow-wrap: anywhere;
+}
+
+#catalog div h3 {
+    grid-area: 4 / 2 / 5 / 3;
+    margin: 0.5rem;
+    font-size: clamp(16px,3.5vh,32px);
+    -webkit-text-stroke: 0.1vh black;
+    text-overflow: ellipsis;
+}
+
+#catalog div:hover {
+    transform: scale(1.05);
+}
+
+#catalog input#select {
+    grid-area: 1 / 3 / 2 / 4;
+    width: 2vw;
+    height: 2vw;
+}
+
+#catalog label {
+    position: relative;
+    display: inline-block;
+    grid-area: 6 / 2 / 7 / 3;
+    width: calc(8vw);
+    height: calc(5vh)
+}
+
+#catalog label input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+#catalog .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 2vw;
+    right: 0;
+    bottom: 0;
+    background-color: red;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border: 2px solid black;
+    border-radius: 0.5rem;
+}
+
+#catalog .slider:before {
+    color: black;
+    font-weight: bold;
+    position: absolute;
+    line-height: 2.2em;
+    content: "Read?";
+    height: 4vh;
+    width: 3vw;
+    left: 0.1vw;
+    bottom: 0.25vh;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 0.5rem;
+}
+
+#catalog input:checked + .slider {
+    background-color: #2196F3;
+}
+
+#catalog input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+#catalog input:checked + .slider:before {
+    -webkit-transform: translateX(5vw);
+    -ms-transform: translateX(5vw);
+    transform: translateX(2.55vw);
+}
+/* ---------------------------------------- */
+/*                  FOOTER                  */
+
+footer {
+    background-color: var(--header-background);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    grid-row: 3 / 4;
+}
+
+footer span a {
+    color: var(--font-color);
+}
+
+footer span a:hover {
+    color: var(--font-hover);
+}
+
+footer a, footer p {
+    text-shadow: 0 0 5px var(--box-background);
+}
+
+/* ---------------------------------------- */
+/*          ADD MODAL (DIALOG)              */
+
+#add-modal {
+    border: 4px solid var(--header-background);
+    border-radius: 0.5rem;
+    display: grid;
+    grid-template-rows: 1fr 5fr;
+    width: 50vw;
+    height: 50vh;
+    background-color: var(--box-background);
+    color: var(--font-color);
+}
+
+#add-modal::backdrop {
+    background: linear-gradient(45deg,#80ced6,#d5f4e6);
+    opacity: .5;
+}
+
+#add-modal button.close {
+    border: 4px solid var(--header-background);
+    border-radius: 0.5rem;
+    width: 2rem;
+    height: 2rem;
+    grid-row: 1 / 2;
+    justify-self: end;
+}
+
+#add-modal form {
+    display: grid;
+    grid-template-rows: repeat(5,1fr) 1fr;
+    grid-template-columns: 1fr 3fr;
+}
+
+#add-modal label {
+    font-size: calc(1vw + 12px);
+    text-align: center;
+    align-self: center;
+}
+
+#add-modal input {
+    align-self: center;
+    height: 3vh;
+    width: clamp(40px,25vw,600px);
+}
+
+#add-modal form button {
+    border: 4px solid var(--header-background);
+    border-radius: 0.5rem;
+    font-size: calc(1vw + 12px);
+    width: 10vw;
+    height: 5vh;
+    display: flex;
+    justify-content: center;
+    justify-self: center;
+    align-items: center;
+    grid-row: 6 / 7;
+    grid-column: span 2;
+}
+
+#add-modal .warning {
+    grid-area: 1 / 1 / 2 / 2;
+    font-size: 1.5rem;
+    text-align: center;
+}
+/* ---------------------------------------- */
+/*          REMOVE MODAL (DIALOG)           */
+
+#remove-modal {
+    position: absolute;
+    top: 2.5vh;
+    left: 40vw;
+    border: 4px solid var(--font-color);
+    border-radius: 1rem;
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: 1fr 5fr 1fr;
+    text-align: center;
+    color: var(--font-color);
+    background-color: var(--box-background);
+    width: 14vw;
+    height: 7vh;
+}
+
+#remove-modal button.close {
+    padding: 1px;
+    text-align: center;
+    justify-self: center;
+    border: 4px solid var(--header-background);
+    border-radius: 0.5rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    grid-column: 3 / 4;
+}
+
+#remove-modal button#submit {
+    position: relative;
+    bottom: 10px;
+    justify-self: center;
+    border: 4px solid var(--header-background);
+    border-radius: 0.5rem;
+    width: calc(6vw + 10px);
+    height: calc(4vw + 10px);
+    grid-row: 2 / 3;
+    grid-column: 2 / 3;
+}
+/* ---------------------------------------- */
+/*          SEARCH MODAL (DIALOG)           */
+
+#search-modal {
+    border: 4px solid var(--header-background);
+    border-radius: 0.5rem;
+    display: grid;
+    grid-template-rows: 1fr 5fr;
+    text-align: center;
+    color: var(--font-color);
+    background-color: var(--box-background);
+    width: 50vw;
+    height: 50vh;
+}
+
+#search-modal::backdrop {
+    background: linear-gradient(45deg,#80ced6,#d5f4e6);
+    opacity: .5;
+}
+
+#search-modal button {
+    justify-self: center;
+    border: 4px solid var(--header-background);
+    border-radius: 0.5rem;
+    width: 2rem;
+    height: 2rem;
+}
+
+#search-modal button.close {
+    grid-row: 1 / 2;
+    justify-self: end;
+}
+
+#search-modal form {
+    display: grid;
+    grid-template-rows: repeat(4, 1fr);
+    grid-row: 2 / 3;
+}
+
+#search-modal h2 {
+    margin: 0;
+    font-size: 2.5rem;
+    justify-self: center;
+    grid-row: 1 / 2;
+}
+
+#search-modal label {
+    font-size: calc(1vw + 12px);
+}
+
+#search-modal input#search {
+    align-self: center;
+    justify-self: center;
+    height: min(3vh,5vh);
+    width: clamp(40px,25vw,600px);
+}
+
+#search-modal button#submit {
+    font-size: calc(1vw + 12px);
+    width: calc(8vw + 10px);
+    height: calc(4vw + 10px);
+}
+
+header button#refresh {
+    border: 4px solid var(--header-background);
+    border-radius: 1rem;
+    background-color: var(--body-background);
+    position: relative;
+    left: 81.5vw;
+    bottom: 15vh;
+    width: 15vw;
+    height: 12vh;
+}
